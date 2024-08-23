@@ -1,0 +1,32 @@
+.view-post {
+    background-color: #718373;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 20px;
+  }
+  
+  .view-post h1 {
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .post-details h2 {
+    color: #0011ff;
+    margin-bottom: 10px;
+  }
+  
+  .post-details p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 5px 0;
+  }
+  
+  .loading {
+    color: #007bff;
+  }
+  
+  .error {
+    color: #dc3545;
+  }
+  

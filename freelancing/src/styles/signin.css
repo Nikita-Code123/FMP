@@ -1,0 +1,44 @@
+
+body {
+    background-color: #adb4a8;
+    font-family:'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
+    align-items: center;
+    font-size: larger;
+    
+  }
+  .card {
+    padding: 50px 50px 50px 50px;
+ background-color: #709775;
+  height: 550px;
+  width:550px;
+    border-radius: 20px;
+    box-shadow: 10px 10px 23px  #84a98c;
+  }
+  .card-title {
+    font-weight: bold;
+  }
+  
+  .btn-primary {
+    align-items: center;
+    background-color: #04334d;
+    border-color: #007bff;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background-color: #007bff;
+    border-color: #004085;
+  }
+  .already{
+   
+    background-color: #709775;
+border-radius: 0px 4px;
+    border: none ;
+    text-decoration: none;
+  }
+  .radiobtn{
+    display: flex;
+   flex-direction: row-reverse  ;
+  
+  }
+ 

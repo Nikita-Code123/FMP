@@ -1,0 +1,16 @@
+.dashboard-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #709775;
+ 
+  }
+  
+  .view-post-container {
+    width: 100%;
+    max-width: 800px;
+    margin-top: 20px;
+  }
+ 
