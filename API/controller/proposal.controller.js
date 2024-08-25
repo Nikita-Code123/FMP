@@ -13,24 +13,32 @@ export const proposal = async (req, res, next) => {
 
         const { freelancerId, projectId, employeeId, coverLetter, proposedBudget, estimatedTimeline } = req.body;
 
-        const proposal = await Proposal.create({
+        const existingProposal = await Proposal.findOne({
+            where: {
+              freelancerId,
+              projectId
+            }
+          });
+      
+          if (existingProposal) {
+            return res.status(400).json({ error: 'You have already submitted a proposal for this project.' });
+          }
+      
+          // Create and save the new proposal
+          const newProposal = await Proposal.create({
             freelancerId,
             projectId,
             employeeId,
             coverLetter,
             proposedBudget,
             estimatedTimeline
-        });
-
-        if (proposal) {
-            return res.status(200).json({ message: "Proposal submitted successfully", proposal });
-        } else {
-            return res.status(500).json({ error: "Internal Server Error" });
+          });
+      
+          res.status(201).json({ message: 'Proposal submitted successfully!', proposal: newProposal });
+        } catch (err) {
+          console.error('Error submitting proposal:', err);
+          res.status(500).json({ error: 'Failed to submit proposal.' });
         }
-    } catch (err) {
-        console.error(err);
-        return res.status(500).json({ error: "Internal Server Error" });
-    }
 };
 
 export const updateProposal = async (req, res, next) => {
@@ -80,7 +88,7 @@ export const getProposal = async (req, res, next) => {
     try {
         const id = req.params.id;
         
-        const proposal = await Proposal.findByPk(id, {
+        const proposal = await Proposal.findOne({where : {employeeId : id}}, {
             include: [
                 { model: User },//, as: 'freelancerId'
                 { model: Project }, //, as: 'projectId'

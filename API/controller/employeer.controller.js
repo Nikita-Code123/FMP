@@ -49,3 +49,18 @@ export const signin = async (req, res, next) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+export const getUserProfile = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const user = await User.findByPk(userId); // Example using Sequelize
+
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      res.status(404).json({ message: 'User not found' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};

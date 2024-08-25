@@ -20,30 +20,12 @@ function Post() {
         const value = event.target.value;
         setBudget(parseInt(value, 10) || 0); // Use 0 as default if parseInt returns NaN
     };
+    const employeeId = localStorage.getItem('userId');
 
     const handlePost = async (e) => {
-        e.preventDefault();
-
-        const user = localStorage.getItem('user');
-        if (!user) {
-            toast.error('User not logged in.');
-            navigate('/dashboard/employee'); 
-            return;
-        }
-
-        let employeeId;
-        try {
-            const parsedUser = JSON.parse(user);
-            employeeId = parsedUser.id;
-        } catch (error) {
-            console.error('Error parsing user data:', error);
-            toast.error('Error parsing user data.');
-            navigate('/dashboard/employee');
-            return;
-        }
-
+       
         if (!employeeId) {
-            toast.error('Invalid user data.');
+            toast.error('Invalid  data.');
             navigate('/dashboard/employee');
             return;
         }

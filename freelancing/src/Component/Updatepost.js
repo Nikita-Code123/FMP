@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const UpdatePost = () => {
-    const [posts, setPosts] = useState([]); // Array to hold multiple posts
+    const [post, setPost] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const { id } = useParams(); // Get the id from the route params
     const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchPosts = async () => {
+        const fetchPost = async () => {
             try {
-                // Fetch all posts (adjust the endpoint as needed)
-                const response = await axios.get('http://localhost:8000/FreelancerMarketplace/Employee/posts');
-                setPosts(response.data.posts || []);
+                const response = await axios.get(`http://localhost:8000/FreelancerMarketplace/Employee/post/${id}`);
+                setPost(response.data.post || {});
                 setLoading(false);
             } catch (err) {
                 setError(err);
@@ -23,30 +23,27 @@ const UpdatePost = () => {
             }
         };
 
-        fetchPosts();
-    }, []);
+        fetchPost();
+    }, [id]);
 
-    const handleChange = (index, e) => {
+    const handleChange = (e) => {
         const { name, value } = e.target;
-        const updatedPosts = [...posts];
-        updatedPosts[index] = { ...updatedPosts[index], [name]: value };
-        setPosts(updatedPosts);
+        setPost(prevPost => ({ ...prevPost, [name]: value }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // Send a batch update request
-            const response = await axios.put('http://localhost:8000/FreelancerMarketplace/Employee/updatePost', { posts });
+            const response = await axios.put(`http://localhost:8000/FreelancerMarketplace/Employee/updatePost/${id}`, post);
             if (response.status === 200) {
                 navigate('/dashboard/employee');
-                toast.success('Posts updated successfully!');
+                toast.success('Post updated successfully!');
             } else {
-                toast.error('Failed to update posts. Please try again.');
+                toast.error('Failed to update post. Please try again.');
             }
         } catch (error) {
-            console.error('Error updating posts:', error);
-            toast.error('Error updating posts. Please try again.');
+            console.error('Error updating post:', error.response ? error.response.data : error.message);
+            toast.error(`Error updating post: ${error.response ? error.response.data.message : error.message}`);
         }
     };
 
@@ -55,95 +52,95 @@ const UpdatePost = () => {
 
     return (
         <div className="container mt-5">
-            <h1>Update Multiple Posts</h1>
+            <h1>Update Post</h1>
             <form onSubmit={handleSubmit}>
-                {posts.map((post, index) => (
-                    <div key={post.id} className="post-form">
+                {post && (
+                    <div className="post-form">
                         <h2>Post ID: {post.id}</h2>
                         <div className="form-group mb-3">
-                            <label htmlFor={`projectName-${index}`}>Project Name</label>
+                            <label htmlFor="projectName">Project Name</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                id={`projectName-${index}`}
+                                id="projectName"
                                 name="projectName"
                                 value={post.projectName}
-                                onChange={(e) => handleChange(index, e)}
+                                onChange={handleChange}
                                 placeholder="Enter project name"
                             />
                         </div>
                         <div className="form-group mb-3">
-                            <label htmlFor={`jobTitle-${index}`}>Job Title</label>
+                            <label htmlFor="jobTitle">Job Title</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                id={`jobTitle-${index}`}
+                                id="jobTitle"
                                 name="jobTitle"
                                 value={post.jobTitle}
-                                onChange={(e) => handleChange(index, e)}
+                                onChange={handleChange}
                                 placeholder="Enter job title"
                             />
                         </div>
                         <div className="form-group mb-3">
-                            <label htmlFor={`description-${index}`}>Description</label>
+                            <label htmlFor="description">Description</label>
                             <textarea
                                 className="form-control"
-                                id={`description-${index}`}
+                                id="description"
                                 name="description"
                                 value={post.description}
-                                onChange={(e) => handleChange(index, e)}
+                                onChange={handleChange}
                                 placeholder="Enter project description"
                             />
                         </div>
                         <div className="form-group mb-3">
-                            <label htmlFor={`date-${index}`}>Date</label>
+                            <label htmlFor="date">Date</label>
                             <input
                                 type="date"
                                 className="form-control"
-                                id={`date-${index}`}
+                                id="date"
                                 name="date"
                                 value={post.date}
-                                onChange={(e) => handleChange(index, e)}
+                                onChange={handleChange}
                             />
                         </div>
                         <div className="form-group mb-3">
-                            <label htmlFor={`skills-${index}`}>Skills</label>
+                            <label htmlFor="skills">Skills</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                id={`skills-${index}`}
+                                id="skills"
                                 name="skills"
                                 value={post.skills}
-                                onChange={(e) => handleChange(index, e)}
+                                onChange={handleChange}
                                 placeholder="Enter required skills"
                             />
                         </div>
                         <div className="form-group mb-3">
-                            <label htmlFor={`budget-${index}`}>Budget</label>
+                            <label htmlFor="budget">Budget</label>
                             <input
                                 type="number"
                                 className="form-control"
-                                id={`budget-${index}`}
+                                id="budget"
                                 name="budget"
                                 value={post.budget}
-                                onChange={(e) => handleChange(index, e)}
+                                onChange={handleChange}
                                 placeholder="Enter budget"
                             />
                         </div>
                         <div className="form-group mb-3">
-                            <label htmlFor={`deadline-${index}`}>Deadline</label>
+                            <label htmlFor="deadline">Deadline</label>
                             <input
                                 type="date"
                                 className="form-control"
-                                id={`deadline-${index}`}
+                                id="deadline"
                                 name="deadline"
                                 value={post.deadline}
-                                onChange={(e) => handleChange(index, e)}
+                                onChange={handleChange}
                             />
                         </div>
                     </div>
-                ))}
-                <button type="submit" className="btn btn-primary">Update Posts</button>
+                )}
+                <button type="submit" className="btn btn-primary">Update Post</button>
             </form>
         </div>
     );

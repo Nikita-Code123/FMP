@@ -1,0 +1,73 @@
+/* src/styles/proposalForm.css */
+
+.proposal-form {
+    padding: 30px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+    margin: 40px auto;
+  }
+  
+  .proposal-form h1 {
+    color: #333;
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .proposal-form .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .proposal-form .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .proposal-form .form-group input,
+  .proposal-form .form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1em;
+    box-sizing: border-box;
+    background-color: #fff;
+  }
+  
+  .proposal-form .form-group textarea {
+    height: 150px;
+    resize: vertical;
+  }
+  
+  .proposal-form .btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+  }
+  
+  .proposal-form .btn:hover {
+    background-color: #218838;
+  }
+  
+  .proposal-form .success {
+    color: #28a745;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+  }
+  
+  .proposal-form .error {
+    color: #dc3545;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+  }
+  

@@ -34,10 +34,11 @@ function SignIn() {
             });
             
             // Assuming the response contains a user object with an id and a token
-            const { user, token } = response.data;
+            const { token, user } = response.data;
+            console.log('User Data:', user); // Debugging log
 
             localStorage.setItem('token', token); // Store token in local storage
-            localStorage.setItem('user', JSON.stringify(user)); // Store the entire user object
+            localStorage.setItem('userId', user.id); // Store only the user ID
 
             toast.success("Successfully Logged In", {
                 style: {

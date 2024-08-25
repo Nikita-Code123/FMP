@@ -46,12 +46,14 @@ const defineAssociations = () => {
 
     Project.belongsTo(Employee, { foreignKey: 'employeeId' });
 Employee.hasMany(Project, { foreignKey: 'employeeId' });
+Project.belongsToMany(Employee, { through: 'EmployeeProjects' });
+Employee.belongsToMany(Project, { through: 'EmployeeProjects' });
 };
 
 // Sync models and associations
 const syncModels = async () => {
     try {
-        await sequelize.sync();
+        await sequelize.sync({alter:true});
         console.log("Successfully Created All Tables");
     } catch (error) {
         console.error("Trouble in creating tables", error);

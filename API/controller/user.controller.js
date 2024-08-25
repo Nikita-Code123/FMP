@@ -2,7 +2,8 @@
 import User from "../model/user.model.js";
 import { validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
-
+import Project from "../model/project.model.js";
+import Employee from "../model/employee.model.js";
 const secretKey = 'nikki0623';
 const generateToken = (user) => {
   return jwt.sign({ id: user.id, username: user.username }, secretKey, {
@@ -58,4 +59,33 @@ export const signin = async (req, res, next) => {
     console.error(err);
     res.status(500).json({ error: "Internal server error" });
   }
+};
+
+export const getprofile = async (req, res,next) => {
+ try {
+  const userId = req.params.id;
+  const user = await User.findByPk(userId);
+  if (user) {
+    res.json(user);
+  } else {
+    res.status(404).json({ message: 'User not found' });
+  }
+ } catch (error) {
+  res.json(error)
+ }
+};
+
+export const getAllProjects = async (req, res) => {
+  try {
+    const projects = await Project.findAll({
+      include: {
+        model: Employee
+      }
+    });
+    res.json({ projects });
+  } catch (error) {
+    console.error('Error fetching projects:', error);
+    res.status(500).json({ error: 'Error fetching projects' });
+  }
+
 };

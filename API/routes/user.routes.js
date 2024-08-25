@@ -1,9 +1,8 @@
 import express from 'express';
-import { signin, signup } from '../controller/user.controller.js';
+import {getprofile, signin, signup ,getAllProjects} from '../controller/user.controller.js';
 import { body } from 'express-validator';
 import { authenticateJWT } from './authmiddleware.js'; // Import the middleware
 import { deleteProposal, getProposal, proposal, updateProposal } from '../controller/proposal.controller.js';
-
 const router = express.Router();
 
 // Public Routes
@@ -58,5 +57,6 @@ router.get(
   authenticateJWT, // Add authentication middleware
   getProposal
 );
-
+router.get("/profile/:id",getprofile);
+router.get('/projects', getAllProjects);
 export default router;

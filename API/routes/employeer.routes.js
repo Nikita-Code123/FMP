@@ -1,7 +1,7 @@
 import express from 'express';
 import { body } from "express-validator";
 import { signin, signup } from '../controller/employeer.controller.js';
-import { deletePost, getPost, posting, updatePost } from "../controller/jobPosting.controller.js";
+import {getUserProfile, deletePost, getPost, posting, updatePost } from "../controller/jobPosting.controller.js";
 const router = express.Router();
 router.get("/post/:id",getPost);
 router.post("/Login", body("email", "email id is not correct").isEmail(),
@@ -24,6 +24,7 @@ router.post("/JobPosting",
 
 router.put("/updatePost", updatePost);
 router.delete("/deletePost/:id",deletePost);
+router.get('/profile/:id', getUserProfile);
 
 
 export default router;
