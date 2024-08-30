@@ -27,6 +27,7 @@ const FreelancerViewProject = () => {
 
   const handleSendProposal = (projectId, employeeId) => {
     navigate(`/send-proposal/${projectId}`, { state: { employeeId } });
+    console.log(employeeId)
   };
   
   
@@ -35,7 +36,7 @@ const FreelancerViewProject = () => {
 
   return (
     <div className="view-projects">
-      <h1>Projects</h1>
+      {/* <h1>Projects</h1> */}
       {projects.length > 0 ? (
         projects.map((project) => (
           <div key={project.id} className="project-details">
@@ -45,10 +46,11 @@ const FreelancerViewProject = () => {
             <p><strong>Skills Required:</strong> {project.skills}</p>
             <p><strong>Budget:</strong> {project.budget}</p>
             <p><strong>Deadline:</strong> {project.deadline}</p>
-            {project.employees && (
+
+            {project.employee && (
               <>
-                <p><strong>Employee Username:</strong> {project.employees.username}</p>
-                <p><strong>Employee Email:</strong> {project.employees.email}</p>
+                <p><strong>Employee Username:</strong> {project.employee.username}</p>
+                <p><strong>Employee Email:</strong> {project.employee.email}</p>
               </>
             )}
             <button 

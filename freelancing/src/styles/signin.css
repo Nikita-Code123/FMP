@@ -1,44 +1,95 @@
-
 body {
-    background-color: #adb4a8;
-    font-family:'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
-    align-items: center;
-    font-size: larger;
-    
-  }
-  .card {
-    padding: 50px 50px 50px 50px;
- background-color: #709775;
-  height: 550px;
-  width:550px;
-    border-radius: 20px;
-    box-shadow: 10px 10px 23px  #84a98c;
-  }
-  .card-title {
-    font-weight: bold;
-  }
-  
-  .btn-primary {
-    align-items: center;
-    background-color: #04334d;
-    border-color: #007bff;
-    color: white;
-  }
-  
-  .btn-primary:hover {
-    background-color: #007bff;
-    border-color: #004085;
-  }
-  .already{
-   
-    background-color: #709775;
-border-radius: 0px 4px;
-    border: none ;
-    text-decoration: none;
-  }
-  .radiobtn{
-    display: flex;
-   flex-direction: row-reverse  ;
-  
-  }
- 
+  background-color: #f4f4f4;
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.signin-container {
+  text-align: center;
+}
+
+.heading {
+  font-size: 2.5em;
+  color: #04334d;
+  margin-bottom: 20px;
+}
+
+.signin-card {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: auto;
+}
+
+.signin-title {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  color: #04334d;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-group label {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.role-selection {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.role-selection label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.btn-primary {
+  background-color: #04334d;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-primary:hover {
+  background-color: #034b55;
+}
+
+.signup-link {
+  background: none;
+  border: none;
+  color: #04334d;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.signup-link span {
+  color: #007bff;
+  font-weight: bold;
+}

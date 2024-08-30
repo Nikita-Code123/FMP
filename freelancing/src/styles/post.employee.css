@@ -1,38 +1,71 @@
+/* Body styling */
 body {
-    background-color: #adb4a8;
-    font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
-    font-size: larger;
+    background-color: #f4f6f9; /* Light background color for the whole page */
+    font-family: 'Arial', sans-serif; /* A clean and modern font */
+    font-size: 16px; /* Set a consistent font size */
+    color: #333; /* Darker text color for better readability */
+    margin: 0;
+    padding: 0;
 }
 
-.details {
-    text-align: center;
-    color: #012a4a;
+/* Container styling */
+.post-container {
+    min-width: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Full height of the viewport */
+    padding: 20px;
+
+}
+
+/* Title styling */
+.post-title {
+    color: #1d3557; /* Dark blue color for consistency with the theme */
     margin-bottom: 30px;
 }
 
-.container {
-    max-width: 800px;
-    margin-top: 30px;
+/* Form styling */
+.post-form {
+    box-shadow: 3px 5px 5px 5px #355075 ;
+    border: 1px solid  #1d3557;
+    /* background-color: #ffffff; White background for form */
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners for a modern look */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    width: 100%;
+    max-width: 600px; /* Set a max-width for better readability */
 }
 
+/* Form group styling */
+.post-form-group {
+    margin-bottom: 20px;
+    /* min-width: 100vh; */
+}
+
+/* Input and textarea styling */
 .form-control {
     border-radius: 5px;
-}
-
-.posted {
-    background-color: #04334d;
-    border-color: #007bff;
-    color: white;
-    height: 45px;
-    width: 100%;
-    border-radius: 10px;
-    text-align: center;
-    font-size: 16px;
+    border: 1px solid #ccc; /* Light grey border */
     padding: 10px;
+    font-size: 16px;
+    color: #333; /* Text color inside form controls */
+    /* min-width: 100vh; */
 }
 
-.posted:hover {
-    background-color: #007bff;
-    border-color: #004085;
-    cursor: pointer;
+/* Error styling for invalid inputs */
+.is-invalid {
+    border-color: #dc3545; /* Red border color for invalid inputs */
+}
+
+.invalid-feedback {
+    display: block;
+    color: #dc3545; /* Red color for error messages */
+    /* font-size */
+}
+.post-button,.post-cancel-button{
+    background-color: #82a9d6;
+  transform: translateY(-2px);
+  margin-left: 10px;
 }

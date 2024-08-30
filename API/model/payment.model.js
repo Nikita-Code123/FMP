@@ -20,7 +20,7 @@ const Payment = sequelize.define("payments", {
     status: {
         type: DataTypes.STRING,
         allowNull: false,
-        defaultValue: "Pending" // Other statuses could be "Completed", "Failed", etc.
+        defaultValue: "Pending" 
     },
     paymentMethod: {
         type: DataTypes.STRING,

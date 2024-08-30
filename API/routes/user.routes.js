@@ -2,7 +2,7 @@ import express from 'express';
 import {getprofile, signin, signup ,getAllProjects} from '../controller/user.controller.js';
 import { body } from 'express-validator';
 import { authenticateJWT } from './authmiddleware.js'; // Import the middleware
-import { deleteProposal, getProposal, proposal, updateProposal } from '../controller/proposal.controller.js';
+import { getStatus,updateprojectStatus, getProposal, proposal, getAproposal} from '../controller/proposal.controller.js';
 const router = express.Router();
 
 // Public Routes
@@ -36,27 +36,15 @@ router.post(
   proposal
 );
 
-router.put(
-  "/updateProposal/:id",
-  authenticateJWT, // Add authentication middleware
-  body("projectId", "Project ID is required").notEmpty(),
-  body("coverLetter", "Cover letter is required").notEmpty(),
-  body("proposedBudget", "Proposed budget is required").notEmpty(),
-  body("estimatedTimeline", "Estimated timeline is required").notEmpty(),
-  updateProposal
-);
 
-router.delete(
-  "/deleteProposal/:id",
-  authenticateJWT, // Add authentication middleware
-  deleteProposal
-);
-
+router.put('/updateProjectstatus/:id',updateprojectStatus);
 router.get(
   "/proposal/:id",
-  authenticateJWT, // Add authentication middleware
+  authenticateJWT, 
   getProposal
 );
 router.get("/profile/:id",getprofile);
 router.get('/projects', getAllProjects);
+router.get('/status/:id', getStatus)
+router.get('/a-proposal/:id',getAproposal);
 export default router;

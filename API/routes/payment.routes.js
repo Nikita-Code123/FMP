@@ -2,7 +2,9 @@ import express from "express";
 import { body } from "express-validator";
 import {
     createPayment,
-    getPayment,
+    
+    getStatus,
+    getMyPayments
 } from "../controller/payment.controller.js";
 
 const router = express.Router();
@@ -16,10 +18,11 @@ router.post("/createPayment",
 );
 
 // Route to get a specific payment by ID
-router.get("/getPaymenthistory/:id", getPayment);
+// router.get("/getPaymenthistory/:id", getPayment);
 
 
 // Route to get all payments for the authenticated user
-// router.get("/myPayments", getMyPayments);
+router.get("/myPayments/:id", getMyPayments);
 
+router.get("/status/:proposalId",getStatus)
 export default router;

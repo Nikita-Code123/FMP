@@ -1,0 +1,93 @@
+.notifications-page {
+  padding: 20px;
+  color: #333;
+  min-height: 100vh;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  max-width: 100%;
+}
+
+.notification-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 100%;
+  margin: 0 auto;
+  font-size: 1rem;
+}
+
+.notification-box {
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  color: #09173d;
+  display: flex;
+  align-items: center;
+}
+
+.notification-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.notification-box .notification-icon {
+  font-size: 1.5em;
+  margin-right: 10px;
+}
+
+.notification-box .notification-message {
+  flex: 1;
+}
+
+.notification-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 100%;
+  background-color: transparent;
+}
+
+.proposal {
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4); 
+}
+
+.payment {
+  background: linear-gradient(135deg, #a2c2e4, #d5a6a6); 
+}
+
+.notification-box.accepted::before {
+  background-color: #27ae60; 
+}
+
+.notification-box.rejected::before {
+  background-color: #e74c3c; 
+}
+
+.notification-box.pending::before {
+  background-color: #f39c12; 
+}
+
+.notification-box.payment-done::before {
+  background-color: #2ecc71; 
+}
+
+.notification-box.payment-pending::before {
+  background-color: #f39c12; 
+}
+
+.loading, .error {
+  text-align: center;
+  color: #e74c3c;
+  font-size: 1.2em;
+}
+
+h1 {
+  text-align: center;
+  color: #0e0d0d;
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}

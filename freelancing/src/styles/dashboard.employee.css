@@ -1,16 +1,141 @@
-.dashboard-container {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background-color: #709775;
- 
-  }
-  
-  .view-post-container {
-    width: 100%;
-    max-width: 800px;
-    margin-top: 20px;
-  }
- 
+.combined-dashboard {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.navbar {
+  background-color: #1d3557;
+  padding: 10px 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.navbar-brand {
+  color: rgb(194, 181, 156);
+  font-size: 1.8em;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.nav-buttons .nav-btn, .searching {
+  background-color: #007bff;
+  border: none;
+  color: #ffffff;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-buttons .nav-btn:hover, .searching:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.nav-btn-logout {
+  background-color: #ff4d4d;
+}
+
+.nav-btn-logout:hover {
+  background-color: #cc0000;
+}
+
+.main-content {
+  display: flex;
+  margin-top: 70px;
+  height: calc(100vh - 70px);
+}
+
+.left-panel {
+  width: 70%;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+.right-panel {
+  width: 30%;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+.left-panel {
+  background-color: #f4f4f4;
+}
+
+.right-panel {
+  /* background-color: #a6a0da; */
+}
+
+.searchh {
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: none;
+  font-size: 16px;
+  height: 40px;
+  width: 300px;
+  max-width: 600px;
+  box-sizing: border-box;
+}
+
+.post-details {
+  background-color: white;
+  border: 1px solid #b1a6a6;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.post-details h2 {
+  font-size: 1.5rem;
+  color: #1d3557;
+  margin-top: 0;
+}
+
+.post-details p {
+  margin: 5px 0;
+  font-size: 16px;
+  color: #555;
+}
+
+.post-details strong {
+  font-weight: 600;
+  color: #333;
+}
+
+.btn-payment {
+  background-color: #4caf50;
+  border: none;
+  color: #ffffff;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-payment:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+
+.loading, .error {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 18px;
+}

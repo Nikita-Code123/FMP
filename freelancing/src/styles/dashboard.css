@@ -1,78 +1,128 @@
-/* dashboard.css */
+/* General Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+}
 
 .dashboard-container {
-    font-family: 'Arial', sans-serif;
-  }
-  
-  .dashboard-header {
-    background-color: #2a6d5e; /* Darker green for the header */
-    padding: 15px 20px;
-  }
-  
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .navbar-brand {
-    color: #0c0a0a;
-    text-decoration: none;
-    font-size: 1.8em;
-    font-weight: bold;
-  }
-  
-  .d-flex {
-    display: flex;
-    align-items: center;
-  }
-  
-  .search {
-    padding: 8px 12px;
-    border-radius: 5px;
-    border: none;
-    margin-right: 15px;
-    font-size: 1em;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .search:focus {
-    outline: none;
-    border: 2px solid #ffffff;
-  }
-  
-  .searchBtn, .btn-post, .btn-profile {
-    background-color: #ffffff;
-    color: #2a6d5e; /* Matching the header color */
-    border: none;
-    padding: 8px 15px;
-    margin-left: 10px;
-    border-radius: 5px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
-  }
-  
-  .searchBtn:hover, .btn-post:hover, .btn-profile:hover {
-    background-color: #f1f1f1;
-    transform: scale(1.05);
-  }
-  
-  .btn-post {
-    background-color: #4caf50; /* Green for Post button */
-    color: #ffffff;
-  }
-  
-  .btn-post:hover {
-    background-color: #45a049;
-  }
-  
-  .btn-profile {
-    background-color: #2196f3; /* Blue for Profile button */
-    color: #ffffff;
-  }
-  
-  .btn-profile:hover {
-    background-color: #0b79d0;
-  }
-  
+  padding: 0 20px;
+}
+
+.dashboard-header {
+  background: linear-gradient(135deg, #2a6d5e, #1d4d3f);
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-brand {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 2em;
+  font-weight: bold;
+  transition: color 0.3s;
+  padding-left: 100px;
+}
+
+.navbar-brand:hover {
+  color: #a5d6a7;
+}
+
+.navbar-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search {
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: none;
+  font-size: 1em;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.3s, border 0.3s;
+  max-width: 300px;
+}
+
+.search:focus {
+  outline: none;
+  border: 2px solid #004d40;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.searchBtn {
+  background-color: #ffffff;
+  color: #2a6d5e;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.searchBtn:hover {
+  background-color: #f1f1f1;
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-post {
+  background-color: #4caf50;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 1em;
+}
+
+.btn-post:hover {
+  background-color: #45a049;
+}
+
+.btn-profile {
+  background-color: #2196f3;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 1em;
+}
+.btn-projectStatus {
+  background-color: #f3b121;
+  color: #110d0d;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 1em;
+}
+.btn-projectStatus:hover{
+  background-color: #af7c0d;
+}
+.btn-profile:hover {
+  background-color: #0b79d0;
+}
+
+.btn-logout {
+  background-color: #f44336;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 1em;
+}
+
+.btn-logout:hover {
+  background-color: #c62828;
+}
+
+.dashboard-content {
+  padding-top: 80px;
+}

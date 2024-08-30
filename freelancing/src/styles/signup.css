@@ -1,0 +1,129 @@
+body {
+    background: linear-gradient(to right, #e0eafc, #cfdef3); /* Subtle gradient background */
+    font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.signup-container {
+    text-align: center;
+    width: 100%;
+    padding: 20px;
+}
+
+.heading {
+    font-size: 2.5em;
+    color: #1d3557; /* Darker shade of blue for a more elegant look */
+    margin-bottom: 30px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.signup-card {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 15px; /* Slightly more rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 450px;
+    margin: auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.signup-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.signup-title {
+    font-size: 1.8em;
+    margin-bottom: 25px;
+    color: #1d3557;
+    font-weight: 600;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    color: #1d3557;
+    font-size: 16px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-top: 5px;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.role-selection {
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+.role-selection label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: #1d3557;
+}
+
+.form-check {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.form-check input {
+    margin-right: 10px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.signin-link {
+    background: none;
+    border: none;
+    color: #007bff;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+.signin-link span {
+    color: #0056b3;
+    font-weight: 600;
+}

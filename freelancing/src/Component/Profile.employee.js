@@ -13,15 +13,29 @@ const Profile = () => {
     const fetchProfileData = async () => {
       try {
         // Retrieve the user data from localStorage
-        const userId = JSON.parse(localStorage.getItem('userId'));
+        const userId = localStorage.getItem('userId');
+        const token = localStorage.getItem('token');
 
-        if (userId) {
-        
-          const userResponse = await axios.get(`http://localhost:8000/FreelancerMarketplace/Employee/profile/${userId}`);
-          setUser(userResponse.data);
-        } else {
-          setError('User not found in localStorage');
+        if (!userId) {
+          setError('User ID not found in localStorage');
+          setLoading(false);
+          return;
         }
+
+        if (!token) {
+          setError('Token not found. Please log in again.');
+          navigate('/login'); // Redirect to login if no token
+          setLoading(false);
+          return;
+        }
+
+        const userResponse = await axios.get(`http://localhost:8000/FreelancerMarketplace/Employee/profile/${userId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}` // Include the token in headers
+          }
+        });
+
+        setUser(userResponse.data);
         setLoading(false);
       } catch (err) {
         console.error('Error fetching profile data:', err);
@@ -31,7 +45,7 @@ const Profile = () => {
     };
 
     fetchProfileData();
-  }, []);
+  }, [navigate]);
 
   if (loading) return <p className="loading">Loading...</p>;
   if (error) return <p className="error">Error: {error.message}</p>;
@@ -43,7 +57,7 @@ const Profile = () => {
       </button>
       <div className="profile-card">
         <div className="profile-header">
-          <h1>{user.name}</h1>
+          <h1>{user.username}</h1>
           <p className="profile-status">Status: Employee</p>
         </div>
         <div className="profile-details">

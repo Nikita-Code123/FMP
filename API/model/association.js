@@ -7,18 +7,18 @@ import Payment from './payment.model.js';
 import Rating from './rating.model.js';
 
 const defineAssociations = () => {
-    
+
     Employee.belongsToMany(Project, { through: 'EmployeeProjects' });
     Project.belongsToMany(Employee, { through: 'EmployeeProjects' });
 
     User.hasMany(Proposal, { foreignKey: 'freelancerId' }); //, as: 'proposals'
     Proposal.belongsTo(User, { foreignKey: 'freelancerId' }); //, as: 'freelancer'
 
-    Project.hasMany(Proposal, { foreignKey: 'projectId'}); //, as: 'proposals' 
+    Project.hasMany(Proposal, { foreignKey: 'projectId' }); //, as: 'proposals' 
     Proposal.belongsTo(Project, { foreignKey: 'projectId' }); //, as: 'project'
 
     Employee.hasMany(Proposal, { foreignKey: 'employeeId' }); //, as: 'proposals'
-    Proposal.belongsTo(Employee, { foreignKey: 'employeeId'}); //, as: 'employee' 
+    Proposal.belongsTo(Employee, { foreignKey: 'employeeId' }); //, as: 'employee' 
 
     // Payment Associations
     Payment.belongsTo(User, { foreignKey: 'userId' }); //, as: 'user'
@@ -30,7 +30,7 @@ const defineAssociations = () => {
 
     // Payment belongs to a Proposal
     Payment.belongsTo(Proposal, { foreignKey: 'proposalId' }); //, as: 'proposal'
-    Proposal.hasOne(Payment, { foreignKey: 'proposalId'});//, as: 'payment' 
+    Proposal.hasOne(Payment, { foreignKey: 'proposalId' });//, as: 'payment' 
 
     // Payment belongs to an Employee
     Payment.belongsTo(Employee, { foreignKey: 'employeeId' }); //, as: 'employee'
@@ -41,19 +41,19 @@ const defineAssociations = () => {
     Rating.belongsTo(User, { foreignKey: 'userId' }); //, as: 'user'
 
     // Proposal has many ratings
-    Proposal.hasMany(Rating, { foreignKey: 'proposalId'}); //, as: 'ratings' 
+    Proposal.hasMany(Rating, { foreignKey: 'proposalId' }); //, as: 'ratings' 
     Rating.belongsTo(Proposal, { foreignKey: 'proposalId' }); //, as: 'proposal'
 
     Project.belongsTo(Employee, { foreignKey: 'employeeId' });
-Employee.hasMany(Project, { foreignKey: 'employeeId' });
-Project.belongsToMany(Employee, { through: 'EmployeeProjects' });
-Employee.belongsToMany(Project, { through: 'EmployeeProjects' });
+    Employee.hasMany(Project, { foreignKey: 'employeeId' });
+    Project.belongsToMany(Employee, { through: 'EmployeeProjects' });  
+    Employee.belongsToMany(Project, { through: 'EmployeeProjects' });
 };
 
 // Sync models and associations
 const syncModels = async () => {
     try {
-        await sequelize.sync({alter:true});
+        await sequelize.sync();
         console.log("Successfully Created All Tables");
     } catch (error) {
         console.error("Trouble in creating tables", error);

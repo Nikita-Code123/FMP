@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import SignIn from './SignIn.js';
-import '../styles/signin.css';
+import '../styles/signup.css'; // Consider renaming this to a more generic name like 'auth.css'
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
+import { FaUserAlt, FaLock, FaEnvelope } from 'react-icons/fa';
+import { RiAccountCircleLine } from 'react-icons/ri';
 
 function SignUp() {
     const [username, setUsername] = useState('');
@@ -13,7 +15,7 @@ function SignUp() {
     const [showSignIn, setShowSignIn] = useState(false);
 
     const handleSubmit = async (e) => {
-        e.preventDefault(); // Prevent form from submitting the default way
+        e.preventDefault();
         
         const endpoint = selectedRole === 'Freelancer'
             ? 'http://localhost:8000/FreelancerMarketplace/Freelancer/Registration'
@@ -29,7 +31,7 @@ function SignUp() {
             console.log('Success', response.data);
             toast.success("Successfully Registered", {
                 style: {
-                    position:"top-center",
+                    position: "top-center",
                     backgroundColor: '#012a4a',
                     color: 'white',
                     fontSize: '16px',
@@ -37,131 +39,114 @@ function SignUp() {
                 }
             });
 
-            // Optionally, handle automatic login or redirect here
-            signin();
-          
+            setShowSignIn(true);
         } catch (error) {
             console.error('Error', error);
-            if (error.response && error.response.data && error.response.data.errors) {
-                toast.error(`Error: ${error.response.data.errors[0].msg}`, {
-                    style: {
-                        position: "top-center",
-                        backgroundColor: '#9b2226',
-                        color: 'white',
-                        fontSize: '16px',
-                        borderRadius: '5px'
-                    }
-                });
-            } else {
-                toast.error('An unexpected error occurred. Please try again.', {
-                    style: {
-                        position: "top-center",
-                        backgroundColor: '#9b2226',
-                        color: 'white',
-                        fontSize: '16px',
-                        borderRadius: '5px'
-                    }
-                });
-            }
+            const errorMessage = error.response && error.response.data && error.response.data.errors
+                ? `Error: ${error.response.data.errors[0].msg}`
+                : 'An unexpected error occurred. Please try again.';
+                
+            toast.error(errorMessage, {
+                style: {
+                    position: "top-center",
+                    backgroundColor: '#9b2226',
+                    color: 'white',
+                    fontSize: '16px',
+                    borderRadius: '5px'
+                }
+            });
         }
     };
 
-    const signin = () => {
-        setShowSignIn(true); // Set state to show SignIn component
-    };
-
-    // Function to handle radio button change
     const handleRoleChange = (e) => {
         setSelectedRole(e.target.value);
     };
 
     if (showSignIn) {
-        return <SignIn />; // Render SignIn component
+        return <SignIn />;
     }
 
     return (
-        <div className="container">
-            <h1 className='heading'>Welcome To Freelancer Marketplace</h1>
-            <div className="row justify-content-center">
-                <div className="col-md-6">
-                    <div className="card mt-5">
-                        <div className="card-body">
-                            <h3 className="card-title text-center">Sign Up</h3>
-                            <form onSubmit={handleSubmit}>
-                                <div className="form-group">
-                                    <label htmlFor="name">Name</label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        id="name"
-                                        placeholder="Enter your name"
-                                        required
-                                        onChange={(e) => setUsername(e.target.value)}
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="email">Email address</label>
-                                    <input
-                                        type="email"
-                                        className="form-control"
-                                        id="email"
-                                        placeholder="Enter your email"
-                                        required
-                                        onChange={(e) => setEmail(e.target.value)}
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="password">Password</label>
-                                    <input
-                                        type="password"
-                                        className="form-control"
-                                        id="password"
-                                        placeholder="Enter your password"
-                                        required
-                                        onChange={(e) => setPassword(e.target.value)}
-                                    />
-                                </div>
-                                <div className='radiobtn m-3'>
-                                    <div className="form-check">
-                                        <input
-                                            className="form-check-input"
-                                            type="radio"
-                                            id="freelancer"
-                                            name="role"
-                                            value="Freelancer"
-                                            checked={selectedRole === 'Freelancer'}
-                                            onChange={handleRoleChange}
-                                        />
-                                        <label className="form-check-label" htmlFor="freelancer">
-                                            Freelancer
-                                        </label>
-                                    </div>
-                                    <div className="form-check">
-                                        <input
-                                            className="form-check-input"
-                                            type="radio"
-                                            id="employee"
-                                            name="role"
-                                            value="Employee"
-                                            checked={selectedRole === 'Employee'}
-                                            onChange={handleRoleChange}
-                                        />
-                                        <label className="form-check-label" htmlFor="employee">
-                                            Employee
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <button type="submit" className="btn btn-primary btn-block">
-                                    Sign Up
-                                </button>
-                            </form>
-                            <button className="already text-center" onClick={signin}>
-                                Already Have an Account? <span style={{color: "blue"}}>Click here</span>
-                            </button>
+        <div className="signup-container">
+            <h1 className='heading'>Welcome to Freelancer Marketplace</h1>
+            <div className="signup-card">
+                <h3 className="signup-title">Sign Up</h3>
+                <form onSubmit={handleSubmit}>
+                    <div className="form-group">
+                        <label htmlFor="name"><FaUserAlt /> Name</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="name"
+                            placeholder="Enter your name"
+                            required
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="email"><FaEnvelope /> Email address</label>
+                        <input
+                            type="email"
+                            className="form-control"
+                            id="email"
+                            placeholder="Enter your email"
+                            required
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="password"><FaLock /> Password</label>
+                        <input
+                            type="password"
+                            className="form-control"
+                            id="password"
+                            placeholder="Enter your password"
+                            required
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
+                    <div className='role-selection'>
+                        <label><RiAccountCircleLine /> Select Role</label>
+                        <div className="form-check">
+                            <input
+                                className="form-check-input"
+                                type="radio"
+                                id="freelancer"
+                                name="role"
+                                value="Freelancer"
+                                checked={selectedRole === 'Freelancer'}
+                                onChange={handleRoleChange}
+                            />
+                            <label className="form-check-label" htmlFor="freelancer">
+                                Freelancer
+                            </label>
+                        </div>
+                        <div className="form-check">
+                            <input
+                                className="form-check-input"
+                                type="radio"
+                                id="employee"
+                                name="role"
+                                value="Employee"
+                                checked={selectedRole === 'Employee'}
+                                onChange={handleRoleChange}
+                            />
+                            <label className="form-check-label" htmlFor="employee">
+                                Employee
+                            </label>
                         </div>
                     </div>
-                </div>
+
+                    <button type="submit" className="btn btn-primary">
+                        Sign Up
+                    </button>
+                </form>
+                <button className="signin-link" onClick={() => setShowSignIn(true)}>
+                    Already Have an Account? <span>Click here</span>
+                </button>
             </div>
         </div>
     );

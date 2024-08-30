@@ -46,49 +46,38 @@ export const createPayment = async (req, res) => {
     }
 };
 
-
-
-
-// Controller to get payment details
-export const getPayment = async (req, res) => {
+export const getMyPayments = async (req, res) => {
     try {
-        const paymentId = req.params.id;
 
-        const payment = await Payment.findByPk(paymentId, {include: [
-            { model: User},//, as: 'freelancerId'
-            { model: Project }, //, as: 'projectId'
-            { model: Employee}//, as: 'employeeId' 
-        ]
-    });
+        const userId = req.params.id;
 
-        if (payment) {
-            return res.status(200).json({ payment });
-        }else{
-            return res.status(401).json({error : "Payment not found"})
-        }
+        // Fetch payments and related proposals
+        const payments = await Payment.findAll({
+            where: { freelancerId:  userId  },
+            include: [{
+                model: Proposal,
+                model: Project
+            }]
+        });
+
+        
+        return res.status(200).json({ payments });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ error: "Internal Server Error" });
     }
 };
 
+export const getStatus = async (req, res) => {
+    try {
+        const { proposalId } = req.params;
 
+        const payment = await Payment.findOne({ where: { proposalId, status: 'Done' } });
+        const isPaid = !!payment;
 
-// // Controller to get all payments for the authenticated user
-// export const getMyPayments = async (req, res) => {
-//     try {
-//         // Assuming user ID is passed in the request user object
-//         const userId = req.user.id;
-
-//         const payments = await Payment.findAll({ where: { userId } });
-
-//         if (payments.length === 0) {
-//             return res.status(404).json({ error: "No payments found for this user" });
-//         }
-
-//         return res.status(200).json({ payments });
-//     } catch (error) {
-//         console.error(error);
-//         return res.status(500).json({ error: "Internal Server Error" });
-//     }
-// };
+        return res.status(200).json({ isPaid });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+};

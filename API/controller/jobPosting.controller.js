@@ -96,11 +96,9 @@ export const getPost = async (req, res, next) => {
         const employeeId = req.params.id;
         const posts = await Project.findAll({ where: { employeeId } });
 
-        if (posts.length > 0) {
+       
             return res.status(200).json({ posts });
-        } else {
-            return res.status(404).json({ error: "No posts found" });
-        }
+       
     } catch (err) {
         console.error(err);
         return res.status(500).json({ error: "Internal Server Problem" });

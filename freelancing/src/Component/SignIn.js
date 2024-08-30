@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import axios from 'axios';
-import SignUp from "./SignUp.js"; 
+import SignUp from "./SignUp.js";
 import '../styles/signin.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for routing
+import { useNavigate } from 'react-router-dom';
+import { FaUserAlt, FaLock } from 'react-icons/fa';
+import { RiAccountCircleLine } from 'react-icons/ri';
 
 function SignIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [selectedRole, setSelectedRole] = useState('');
     const [showSignUp, setShowSignUp] = useState(false);
-    const navigate = useNavigate(); // Hook for navigation
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -28,17 +30,14 @@ function SignIn() {
         }
 
         try {
-            const response = await axios.post(endpoint, {
-                email,
-                password
-            });
-            
-            // Assuming the response contains a user object with an id and a token
-            const { token, user } = response.data;
-            console.log('User Data:', user); // Debugging log
+            const response = await axios.post(endpoint, 
+                { email, password },
+               
+            );
 
-            localStorage.setItem('token', token); // Store token in local storage
-            localStorage.setItem('userId', user.id); // Store only the user ID
+            const { token, user } = response.data;
+            localStorage.setItem('token', token);
+            localStorage.setItem('userId', user.id);
 
             toast.success("Successfully Logged In", {
                 style: {
@@ -50,15 +49,10 @@ function SignIn() {
                 }
             });
 
-            // Redirect to dashboard based on role
-            if (selectedRole === 'Employee') {
-                navigate('/dashboard/employee'); // Redirect to Employee dashboard
-            } else if (selectedRole === 'Freelancer') {
-                navigate('/dashboard/freelancer'); // Redirect to Freelancer dashboard
-            }
+            navigate(selectedRole === 'Employee' ? '/dashboard/employee' : '/dashboard/freelancer');
         } catch (error) {
-            console.error('Error:', error);
-            toast.error('Invalid email or password. Please try again.', {
+            console.error('Error:', error.response ? error.response.data : error.message);
+            toast.error(error.response ? error.response.data.error : 'Invalid email or password. Please try again.', {
                 style: {
                     position: "top-center",
                     backgroundColor: '#9b2226',
@@ -83,80 +77,75 @@ function SignIn() {
     }
 
     return (
-        <div className="container">
-            <h1 className='heading'>Welcome To Freelancer Marketplace</h1>
-            <div className="row justify-content-center">
-                <div className="col-md-6">
-                    <div className="card mt-5">
-                        <div className="card-body">
-                            <h3 className="card-title text-center">Sign In</h3>
-                            <form onSubmit={handleSubmit}>
-                                <div className="form-group">
-                                    <label htmlFor="email">Email address</label>
-                                    <input
-                                        type="email"
-                                        className="form-control"
-                                        id="email"
-                                        placeholder="Enter your email"
-                                        required
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="password">Password</label>
-                                    <input
-                                        type="password"
-                                        className="form-control"
-                                        id="password"
-                                        placeholder="Enter your password"
-                                        required
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                    />
-                                </div>
+        <div className="signin-container">
+            <h1 className='heading'>Welcome to Freelancer Marketplace</h1>
+            <div className="signin-card">
+                <h3 className="signin-title">Sign In</h3>
+                <form onSubmit={handleSubmit}>
+                    <div className="form-group">
+                        <label htmlFor="email"><FaUserAlt /> Email address</label>
+                        <input
+                            type="email"
+                            className="form-control"
+                            id="email"
+                            placeholder="Enter your email"
+                            required
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="password"><FaLock /> Password</label>
+                        <input
+                            type="password"
+                            className="form-control"
+                            id="password"
+                            placeholder="Enter your password"
+                            required
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
 
-                                <div className='radiobtn m-3'>
-                                    <div className="form-check">
-                                        <input
-                                            className="form-check-input"
-                                            type="radio"
-                                            id="freelancer"
-                                            name="role"
-                                            value="Freelancer"
-                                            checked={selectedRole === 'Freelancer'}
-                                            onChange={handleRoleChange}
-                                        />
-                                        <label className="form-check-label" htmlFor="freelancer">
-                                            Freelancer
-                                        </label>
-                                    </div>
-                                    <div className="form-check">
-                                        <input
-                                            className="form-check-input"
-                                            type="radio"
-                                            id="employee"
-                                            name="role"
-                                            value="Employee"
-                                            checked={selectedRole === 'Employee'}
-                                            onChange={handleRoleChange}
-                                        />
-                                        <label className="form-check-label" htmlFor="employee">
-                                            Employee
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <button type="submit" className="btn btn-primary btn-block">
-                                    Sign In
-                                </button>
-                            </form>
-                            <button className="already text-center" onClick={signup}>
-                                Don't have an account? <span style={{color: "blue"}}>Register</span>
-                            </button>
+                    <div className='role-selection'>
+                        <label><RiAccountCircleLine /> Select Role</label>
+                        <div className="form-check">
+                            <input
+                                className="form-check-input"
+                                type="radio"
+                                id="freelancer"
+                                name="role"
+                                value="Freelancer"
+                                checked={selectedRole === 'Freelancer'}
+                                onChange={handleRoleChange}
+                            />
+                            <label className="form-check-label" htmlFor="freelancer">
+                                Freelancer
+                            </label>
+                        </div>
+                        <div className="form-check">
+                            <input
+                                className="form-check-input"
+                                type="radio"
+                                id="employee"
+                                name="role"
+                                value="Employee"
+                                checked={selectedRole === 'Employee'}
+                                onChange={handleRoleChange}
+                            />
+                            <label className="form-check-label" htmlFor="employee">
+                                Employee
+                            </label>
                         </div>
                     </div>
-                </div>
+
+                    <button type="submit" className="btn btn-primary">
+                        Sign In
+                    </button>
+                </form>
+                <button className="signup-link" onClick={signup}>
+                    Don't have an account? <span>Register</span>
+                </button>
             </div>
         </div>
     );

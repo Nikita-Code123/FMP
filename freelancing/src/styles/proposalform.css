@@ -1,73 +1,87 @@
-/* src/styles/proposalForm.css */
-
 .proposal-form {
-    padding: 30px;
-    background-color: #f5f5f5;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 700px;
-    margin: 40px auto;
-  }
-  
-  .proposal-form h1 {
-    color: #333;
-    font-size: 2em;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .proposal-form .form-group {
-    margin-bottom: 20px;
-  }
-  
-  .proposal-form .form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 1.1em;
-    font-weight: bold;
-    color: #555;
-  }
-  
-  .proposal-form .form-group input,
-  .proposal-form .form-group textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 1em;
-    box-sizing: border-box;
-    background-color: #fff;
-  }
-  
-  .proposal-form .form-group textarea {
-    height: 150px;
-    resize: vertical;
-  }
-  
-  .proposal-form .btn {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
-  }
-  
-  .proposal-form .btn:hover {
-    background-color: #218838;
-  }
-  
-  .proposal-form .success {
-    color: #28a745;
-    font-size: 1.2em;
-    margin-bottom: 20px;
-  }
-  
-  .proposal-form .error {
-    color: #dc3545;
-    font-size: 1.2em;
-    margin-bottom: 20px;
-  }
-  
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  margin: 40px auto;
+  box-sizing: border-box;
+}
+
+.proposal-form h1 {
+  color: #0f1450;
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+.proposal-form .form-group {
+  margin-bottom: 25px;
+}
+
+.proposal-form .form-group label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 1.2em;
+  font-weight: 500;
+  color: #333;
+}
+
+.proposal-form .form-group input,
+.proposal-form .form-group textarea {
+  width: 100%;
+  padding: 14px;
+  border-color: #0e2036;
+  border-radius: 8px;
+  font-size: 1em;
+  background-color: #f8f8f8;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.proposal-form .form-group input:focus,
+.proposal-form .form-group textarea:focus {
+  border-color: #0e2036;
+  background-color: #ffffff;
+  outline: none;
+}
+
+.proposal-form .form-group textarea {
+  height: 150px;
+  resize: vertical;
+}
+
+.proposal-form .btn {
+  background-color: #0e234b;
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1em;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.proposal-form .btn:hover {
+  background-color: #1d244d;
+  transform: translateY(-2px);
+}
+
+.proposal-form .btn:active {
+  background-color: #041d31;
+  transform: translateY(0);
+}
+
+.proposal-form .success {
+  color: #2a6d5e;
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.proposal-form .error {
+  color: #dc3545;
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  text-align: center;
+}
