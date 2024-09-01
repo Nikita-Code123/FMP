@@ -4,7 +4,8 @@ import Employee from './employee.model.js';
 import Project from './project.model.js';
 import Proposal from './proposal.model.js';
 import Payment from './payment.model.js';
-import Rating from './rating.model.js';
+import UserRating from './userrating.model.js';
+import EmployeeRating from './employeerating.model.js';
 
 const defineAssociations = () => {
 
@@ -36,18 +37,23 @@ const defineAssociations = () => {
     Payment.belongsTo(Employee, { foreignKey: 'employeeId' }); //, as: 'employee'
     Employee.hasMany(Payment, { foreignKey: 'employeeId' }); //, as: 'payments'
 
-    // User has many ratings
-    User.hasMany(Rating, { foreignKey: 'userId' });//, as: 'ratings'
-    Rating.belongsTo(User, { foreignKey: 'userId' }); //, as: 'user'
-
-    // Proposal has many ratings
-    Proposal.hasMany(Rating, { foreignKey: 'proposalId' }); //, as: 'ratings' 
-    Rating.belongsTo(Proposal, { foreignKey: 'proposalId' }); //, as: 'proposal'
-
     Project.belongsTo(Employee, { foreignKey: 'employeeId' });
     Employee.hasMany(Project, { foreignKey: 'employeeId' });
-    Project.belongsToMany(Employee, { through: 'EmployeeProjects' });  
+    Project.belongsToMany(Employee, { through: 'EmployeeProjects' });
     Employee.belongsToMany(Project, { through: 'EmployeeProjects' });
+
+    User.hasMany(UserRating, { foreignKey: 'userId' });
+    UserRating.belongsTo(User, { foreignKey: 'userId' });
+
+    Employee.hasMany(EmployeeRating, { foreignKey: 'employeeId' });
+    EmployeeRating.belongsTo(Employee, { foreignKey: 'employeeId' });
+
+    User.hasMany(EmployeeRating, { foreignKey: 'reviewerId' });
+    EmployeeRating.belongsTo(User, { foreignKey: 'reviewerId' });
+
+    User.hasMany(UserRating, { foreignKey: 'reviewerId' });
+    UserRating.belongsTo(User, { foreignKey: 'reviewerId' });
+  
 };
 
 // Sync models and associations

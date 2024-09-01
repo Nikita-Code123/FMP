@@ -37,7 +37,7 @@ export const proposal = async (req, res, next) => {
     res.status(201).json({ message: 'Proposal submitted successfully!', proposal: newProposal });
   } catch (err) {
     console.error('Error submitting proposal:', err);
-    res.status(500).json({ error: 'Failed to submit proposal.' });
+    res.status(500).json({ error: 'Failed to submit proposal.',err });
   }
 };
 
@@ -58,9 +58,7 @@ export const getProposal = async (req, res, next) => {
 
     if (proposal) {
       return res.status(200).json({ proposal });
-    } else {
-      return res.status(404).json({ error: "Proposal not found" });
-    }
+    } 
   } catch (err) {
     console.error('Error fetching proposal:', err);
     return res.status(500).json({ error: "Internal Server Error" });
@@ -137,15 +135,14 @@ export const getAproposal=async (req, res) => {
       where: { id: proposalId },
       include: [ 
         { model: Project },
-        { model: Employee }
+        { model: Employee },
+        {model : User}
       ]
     });
 
     if (proposal) {
       return res.status(200).json({ proposal });
-    } else {
-      return res.status(404).json({ error: 'Proposal not found' });
-    }
+    } 
   } catch (err) {
     console.error(err);
     return res.status(500).json({ error: 'Internal Server Error' });

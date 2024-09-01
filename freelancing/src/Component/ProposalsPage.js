@@ -36,7 +36,7 @@ const ProposalsPage = () => {
       } catch (err) {
         console.error('API Error:', err);
         const errorMessage = err.response?.data?.message || 'Unknown error occurred';
-        setError(new Error(errorMessage));
+        // setError(new Error(errorMessage));
         setLoading(false);
       }
     };
@@ -144,9 +144,7 @@ const ProposalsPage = () => {
     }
   };
 
-  const handleMakePayment = (proposalId) => {
-    navigate(`/payment/${proposalId}`);
-  };
+ 
 const handleOK=()=>{
   setOk(true);
 }
@@ -154,7 +152,7 @@ if(ok){
   navigate('/dashboard/employee')
 }
   if (loading) return <p className="loading">Loading...</p>;
-  if (error) return <p className="error">Error: {error.message || "Unknown error occurred"}</p>;
+  // if (error) return <p className="error">Error: {error.message || "Unknown error occurred"}</p>;
 
   return (
     <div className="proposals-page">

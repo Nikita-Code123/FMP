@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import EmployeeRatingsList from '../Component/EmployeeRatingList.js'; // Import the ratings component
 import '../styles/profile.employee.css';
 
 const Profile = () => {
@@ -8,13 +9,13 @@ const Profile = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  // const { employeeId } = useParams(); // Extract employeeId from URL parameters
 
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        // Retrieve the user data from localStorage
-        const userId = localStorage.getItem('userId');
         const token = localStorage.getItem('token');
+        const userId = localStorage.getItem('userId');
 
         if (!userId) {
           setError('User ID not found in localStorage');
@@ -65,6 +66,10 @@ const Profile = () => {
           <p><strong>Username:</strong> {user.username}</p>
         </div>
       </div>
+      <div className="ratings-section">
+        
+      </div>
+      <EmployeeRatingsList employeeId={user.id} />
     </div>
   );
 };

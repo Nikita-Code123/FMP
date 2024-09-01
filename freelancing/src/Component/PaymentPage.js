@@ -1,28 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useParams, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { FaCreditCard, FaPaypal, FaBitcoin } from 'react-icons/fa';
 import '../styles/payment.css';
 
 const PaymentPage = () => {
   const { proposalId } = useParams();
+  const navigate = useNavigate();
   const [proposal, setProposal] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState('Credit Card');
   const [isPaid, setIsPaid] = useState(false);
   const token = localStorage.getItem('token');
-  
   const employeeId = localStorage.getItem('userId');
-
 
   useEffect(() => {
     const fetchProposal = async () => {
       try {
-       
-        // Check if the proposal has already been paid for
+        const proposalResponse = await axios.get(`http://localhost:8000/FreelancerMarketplace/Freelancer/a-proposal/${proposalId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        setProposal(proposalResponse.data.proposal);
+
         const paymentResponse = await axios.get(`http://localhost:8000/FreelancerMarketplace/Payment/status/${proposalId}`, {
           headers: {
             'Authorization': `Bearer ${token}`
@@ -41,17 +44,22 @@ const PaymentPage = () => {
   }, [proposalId, token]);
 
   const handlePayment = async () => {
+    if (!proposal) {
+      Swal.fire('Error', 'Proposal data is missing.', 'error');
+      return;
+    }
+
     try {
       const response = await axios.post(
         'http://localhost:8000/FreelancerMarketplace/Payment/createPayment',
         {
           amount: proposal.proposedBudget,
           freelancerId: proposal.user.id,
-          status: 'Done', // Update status to 'Done' after payment
+          status: 'Done',
           paymentMethod: paymentMethod,
           proposalId: proposal.id,
           projectId: proposal.project.id,
-          employeeId: localStorage.getItem('userId')
+          employeeId: employeeId
         },
         {
           headers: {
@@ -59,26 +67,28 @@ const PaymentPage = () => {
           }
         }
       );
-      toast.success('Payment processed successfully.');
+      Swal.fire('Success', 'Payment processed successfully.', 'success').then(() => {
+        // Navigate to the desired page, e.g., dashboard or proposals page
+        navigate('/dashboard/employee'); // Replace with the appropriate route
+      });
       setIsPaid(true); // Update the local state to reflect payment
     } catch (err) {
       console.error('Payment processing failed:', err);
-      toast.error('Failed to process payment.');
+      Swal.fire('Error', 'Failed to process payment.', 'error');
     }
   };
 
   if (loading) return <p className="loading">Loading...</p>;
-  if (error) return <p className="error">Error: {error.message || "Unknown error occurred"}</p>;
+  if (error) return <p className="error">Error: {error.message || 'Unknown error occurred'}</p>;
 
   return (
     <div className="payment-page">
-      <ToastContainer />
       <h1>Payment Page</h1>
       {proposal ? (
         <div className="payment-details">
           <p><strong>Proposal ID:</strong> {proposalId}</p>
           <p><strong>Freelancer:</strong> {proposal.user.username}</p>
-          <p><strong>Amount:</strong> ${proposal.proposedBudget}</p>
+          <p><strong>Amount:</strong> Rs.{proposal.proposedBudget}</p>
           
           {/* Payment Method Selection */}
           <div className="payment-method">
@@ -121,7 +131,7 @@ const PaymentPage = () => {
           )}
         </div>
       ) : (
-        <p>No proposal data available.</p>
+        <p>Oops ! proposal data not available.</p>
       )}
     </div>
   );

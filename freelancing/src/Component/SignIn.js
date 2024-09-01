@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import axios from 'axios';
 import SignUp from "./SignUp.js";
 import '../styles/signin.css';
-import 'react-toastify/dist/ReactToastify.css';
-import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { FaUserAlt, FaLock } from 'react-icons/fa';
 import { RiAccountCircleLine } from 'react-icons/ri';
+import { Link } from "react-router-dom";
 
 function SignIn() {
     const [email, setEmail] = useState('');
@@ -25,42 +25,64 @@ function SignIn() {
             : null;
 
         if (!endpoint) {
-            toast.error('Please select a role.');
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please select a role!',
+                position: 'top-center',
+                background: '#fff',
+                color: '#000',
+                confirmButtonColor: '#012a4a',
+            });
             return;
         }
 
         try {
-            const response = await axios.post(endpoint, 
-                { email, password },
-               
-            );
-
+            const response = await axios.post(endpoint, { email, password });
             const { token, user } = response.data;
+
             localStorage.setItem('token', token);
             localStorage.setItem('userId', user.id);
 
-            toast.success("Successfully Logged In", {
-                style: {
-                    position: "top-center",
-                    backgroundColor: '#012a4a',
-                    color: 'white',
-                    fontSize: '16px',
-                    borderRadius: '5px'
-                }
+            Swal.fire({
+                icon: 'success',
+                title: 'Logged in Successfully',
+                position: 'top-center',
+                background: '#012a4a',
+                color: 'white',
+                confirmButtonColor: '#38a3a5',
             });
 
             navigate(selectedRole === 'Employee' ? '/dashboard/employee' : '/dashboard/freelancer');
         } catch (error) {
             console.error('Error:', error.response ? error.response.data : error.message);
-            toast.error(error.response ? error.response.data.error : 'Invalid email or password. Please try again.', {
-                style: {
-                    position: "top-center",
-                    backgroundColor: '#9b2226',
+
+            if (error.response && error.response.status === 401) {
+                // Token expired
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Session Expired',
+                    text: 'Your session has expired. Please log in again.',
+                    position: 'top-center',
+                    background: '#9b2226',
                     color: 'white',
-                    fontSize: '16px',
-                    borderRadius: '5px'
-                }
-            });
+                    confirmButtonColor: '#c71f37',
+                });
+
+                // Clear the token from localStorage and redirect to the homepage
+                localStorage.removeItem('token');
+                navigate('/');
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: error.response ? error.response.data.error : 'Invalid email or password. Please try again.',
+                    position: 'top-center',
+                    background: '#9b2226',
+                    color: 'white',
+                    confirmButtonColor: '#c71f37',
+                });
+            }
         }
     };
 
@@ -146,6 +168,7 @@ function SignIn() {
                 <button className="signup-link" onClick={signup}>
                     Don't have an account? <span>Register</span>
                 </button>
+                <Link to="/forgot-password" className="forgot-password-link">Forgot Password?</Link>
             </div>
         </div>
     );

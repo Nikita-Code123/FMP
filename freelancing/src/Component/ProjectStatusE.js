@@ -28,7 +28,7 @@ const ProjectStatusE = () => {
       setLoading(false);
     } catch (err) {
       console.error('Error fetching proposals:', err);
-      setError('Error fetching proposals. Please try again.');
+      // setError('Error fetching proposals. Please try again.');
       setLoading(false);
     }
   };
@@ -38,7 +38,7 @@ const ProjectStatusE = () => {
   }, []);
 
   if (loading) return <p className="loading">Loading...</p>;
-  if (error) return <p className="error">Error: {error}</p>;
+  // if (error) return <p className="error">Error: {error}</p>;
 
   return (
     <div className="project-status">

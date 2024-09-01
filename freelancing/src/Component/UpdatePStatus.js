@@ -93,7 +93,7 @@ const UpdatePStatus = () => {
             'Project status has been updated to completed.',
             'success'
           );
-          navigate('/dashboard/freelancer');
+          navigate(`/rate/${proposal.employee.id}`);
         } else {
           toast.error('Failed to update project status. Please try again.');
         }

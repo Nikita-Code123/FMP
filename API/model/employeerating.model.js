@@ -1,7 +1,10 @@
+// models/employeeRating.model.js
 import sequelize from "../db/dbconnection.js";
 import { DataTypes } from "sequelize";
+import Employee from "./employee.model.js"; // Assuming Employee model exists
+import User from "./user.model.js"; // Assuming User model exists
 
-const Rating = sequelize.define("Rating", {
+const EmployeeRating = sequelize.define("EmployeeRating", {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -20,26 +23,22 @@ const Rating = sequelize.define("Rating", {
         type: DataTypes.TEXT,
         allowNull: true
     },
-    userId: {
+    employeeId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'users',
+            model: Employee,
             key: 'id'
         }
     },
-    proposalId: {
+    reviewerId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'Proposals',
+            model: User,
             key: 'id'
         }
-    },
-    reviewerRole: {
-        type: DataTypes.ENUM('freelancer', 'employer'),
-        allowNull: false
     }
 });
 
-export default Rating;
+export default EmployeeRating;

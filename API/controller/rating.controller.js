@@ -1,5 +1,5 @@
 import { validationResult } from "express-validator";
-import Rating from "../model/rating.model.js";
+import Rating from "../model/employeerating.model.js";
 import User from "../model/user.model.js";
 import Proposal from "../model/proposal.model.js";
 

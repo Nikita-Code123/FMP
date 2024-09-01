@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useLocation, useParams } from 'react-router-dom';
-import { toast } from 'react-toastify'; 
+import Swal from 'sweetalert2';
 import '../styles/proposalform.css';
 import { useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
 
 const ProposalForm = () => {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const location = useLocation();
   const { projectId } = useParams();
   const { employeeId } = location.state || {}; 
@@ -20,13 +19,17 @@ const ProposalForm = () => {
   const freelancerId = localStorage.getItem('userId');
   const token = localStorage.getItem('token');
   
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!employeeId) {
-      toast.error('Employee ID is missing.');
-      return;
+      Swal.fire({
+        title: 'Error!',
+        text: 'Employee ID is missing.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+      return navigate('/dashboard/freelancer');
     }
 
     try {
@@ -38,7 +41,7 @@ const ProposalForm = () => {
         proposedBudget,
         estimatedTimeline
       });
- navigate('/dashboard/freelancer');
+
       const response = await axios.post(
         'http://localhost:8000/FreelancerMarketplace/Freelancer/projectProposal',
         {
@@ -63,20 +66,26 @@ const ProposalForm = () => {
         icon: 'success',
         confirmButtonText: 'Great!'
       });
+
       navigate('/dashboard/freelancer');
     } catch (err) {
       console.error('Error submitting proposal:', err.response?.data || err.message);
+
       if (err.response?.status === 400 && err.response?.data?.error === 'You have already submitted a proposal for this project.') {
-        // toast.error('You have already submitted a proposal for this project.');
         Swal.fire({
-          title: 'OOps !',
-          text: 'Yo have already submmitted a proposal for this project',
+          title: 'Oops!',
+          text: 'You have already submitted a proposal for this project.',
           icon: 'info',
           confirmButtonText: 'OK'
         });
         navigate('/dashboard/freelancer');
       } else {
-        toast.error('Failed to submit proposal.');
+        Swal.fire({
+          title: 'Error!',
+          text: 'Failed to submit proposal. Please try again later.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
       }
     }
   };

@@ -34,9 +34,9 @@ const Projectstatus = () => {
                 setLoading(false);
             } catch (err) {
                 console.error('Error fetching proposals:', err);
-                setError(err);
+                // setError(err);
                 setLoading(false);
-                toast.error('Error fetching proposals. Please try again.');
+                // toast.error('Error fetching proposals. Please try again.');
             }
         };
 
@@ -46,7 +46,7 @@ const Projectstatus = () => {
 
 
     if (loading) return <p className="loading">Loading...</p>;
-    if (error) return <p className="error">Error: {error.message || 'Unknown error occurred'}</p>;
+    // if (error) return <p className="error">Error: {error.message || 'Unknown error occurred'}</p>;
 
     return (
         <div className="proposals-page">
@@ -56,7 +56,7 @@ const Projectstatus = () => {
                     <div key={proposal.id} className="proposal-card">
                         <h2>{proposal.project.projectName}</h2>
                         <p><strong>Project Description:</strong> {proposal.project.description}</p>
-                        <p><strong>Employee Name:</strong> {proposal.employee.name}</p>
+                        <p><strong>Employee Name:</strong> {proposal.employee.username}</p>
                         <p><strong>Status:</strong> {proposal.status}</p>
 
                         <Link to={`/update-status/${proposal.id}`} className="update-btn">

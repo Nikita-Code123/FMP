@@ -35,9 +35,9 @@ const Dashboard = () => {
         setLoading(false);
       } catch (err) {
         console.error('Error fetching posts:', err);
-        setError(err);
+        // setError(err);
         setLoading(false);
-        toast.error('Error fetching posts. Please try again.');
+        // toast.error('Error fetching posts. Please try again.');
       }
     };
 
@@ -73,7 +73,7 @@ const Dashboard = () => {
   };
 
   if (loading) return <p className="loading">Loading...</p>;
-  if (error) return <p className="error">Error: {error.message || 'Unknown error occurred'}</p>;
+  // if (error) return <p className="error">Error: {error.message || 'Unknown error occurred'}</p>;
 
   return (
     <div className="combined-dashboard">
@@ -93,7 +93,7 @@ const Dashboard = () => {
           </button>
         </div>
         <div className="nav-buttons">
-          <button className='nav-btn' type='button' onClick={() => navigate('/post')}>Post</button>
+          <button className='nav-btn' type='button' onClick={() => navigate('/post')}>Create Project</button>
           <button className='nav-btn' type='button' onClick={() => navigate('/profile/employee')}>Profile</button>
           <button className='nav-btn' type='button' onClick={() => navigate('/proposals')}>View Proposals</button>
           <button className='nav-btn nav-btn-logout' type='button' onClick={() => {

@@ -1,0 +1,63 @@
+/* Container for the entire ratings section */
+.ratings-container {
+    margin: 20px auto;
+    max-width: 600px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Title styling */
+.ratings-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+/* Styling for each rating card */
+.rating-card {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+/* Hover effect on rating cards */
+.rating-card:hover {
+    transform: translateY(-3px);
+}
+
+/* Styling for stars */
+.rating-stars {
+    font-size: 18px;
+    color: #f1c40f;
+    margin-bottom: 10px;
+}
+
+/* Filled star */
+.star.filled {
+    color: #f1c40f;
+}
+
+/* Empty star */
+.star {
+    color: #ccc;
+}
+
+/* Comment styling */
+.rating-comment {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+/* Reviewer styling */
+.rating-reviewer {
+    font-size: 14px;
+    color: #777;
+    font-style: italic;
+}

@@ -113,7 +113,7 @@ const NotificationsPage = () => {
         setLoading(false);
       } catch (err) {
         console.error('Error fetching notifications:', err);
-        setError(err.response ? new Error(err.response.data.message) : new Error('Unknown error occurred'));
+        // setError(err.response ? new Error(err.response.data.message) : new Error('Unknown error occurred'));
         setLoading(false);
       }
     };

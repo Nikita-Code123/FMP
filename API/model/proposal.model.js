@@ -1,6 +1,9 @@
 import sequelize from '../db/dbconnection.js';
 import { DataTypes } from 'sequelize';
 // Define the Proposal model
+import User from './user.model.js';
+import Employee from './employee.model.js';
+import Project from './project.model.js';
 const Proposal = sequelize.define('Proposal', {
   id: {
     type: DataTypes.INTEGER,
@@ -11,7 +14,7 @@ const Proposal = sequelize.define('Proposal', {
   freelancerId: {
     type: DataTypes.INTEGER,
     references: {
-      model: 'User', // Ensure the model name is correct
+      model: User, // Ensure the model name is correct
       key: 'id'
     },
     allowNull: false
@@ -19,7 +22,7 @@ const Proposal = sequelize.define('Proposal', {
   projectId: {
     type: DataTypes.INTEGER,
     references: {
-      model: 'Project', 
+      model: Project, 
       key: 'id'
     },
     allowNull: false
@@ -27,7 +30,7 @@ const Proposal = sequelize.define('Proposal', {
   employeeId: {
     type: DataTypes.INTEGER,
     references: {
-      model: 'Employee', 
+      model: Employee, 
       key: 'id'
     },
     allowNull: true 

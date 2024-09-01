@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/post.employee.css';
-import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 
 function Post() {
@@ -23,60 +23,57 @@ function Post() {
         setBudget(value); // Store value as string
     };
 
-   
-
     const handlePost = async (e) => {
         e.preventDefault();
 
-        // if (!validateForm()) return; // If validation fails, stop form submission
+        // Confirm with SweetAlert2
+        const result = await Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to post this project?",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, post it!',
+            cancelButtonText: 'No, cancel'
+        });
 
-        const employeeId = localStorage.getItem('userId');
-        const token = localStorage.getItem('token');
+        if (result.isConfirmed) {
+            const employeeId = localStorage.getItem('userId');
+            const token = localStorage.getItem('token');
 
-        if (!employeeId || !token) {
-            toast.error('Invalid data or not authenticated.');
-            navigate('/dashboard/employee');
-            return;
-        }
+            if (!employeeId || !token) {
+                Swal.fire('Error', 'Invalid data or not authenticated.', 'error');
+                navigate('/dashboard/employee');
+                return;
+            }
 
-        try {
-            await axios.post('http://localhost:8000/FreelancerMarketplace/Employee/JobPosting', {
-                projectName, 
-                jobTitle, 
-                description, 
-                date, 
-                skills, 
-                budget, 
-                deadline,
-                employeeId
-            }, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
+            try {
+                await axios.post('http://localhost:8000/FreelancerMarketplace/Employee/JobPosting', {
+                    projectName, 
+                    jobTitle, 
+                    description, 
+                    date, 
+                    skills, 
+                    budget, 
+                    deadline,
+                    employeeId
+                }, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
 
-            toast.success("Post successfully created!", {
-                style: {
-                    position: "top-center",
-                    backgroundColor: '#012a4a',
-                    color: 'white',
-                    fontSize: '16px',
-                    borderRadius: '5px'
-                }
-            });
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Project successfully created!',
+                    icon: 'success',
+                    confirmButtonText: 'Great'
+                });
 
-            navigate('/dashboard/employee');
-        } catch (err) {
-            console.error("Error posting data:", err);
-            toast.error('Error posting data. Please try again.', {
-                style: {
-                    position: "top-center",
-                    backgroundColor: '#9b2226',
-                    color: 'white',
-                    fontSize: '16px',
-                    borderRadius: '5px'
-                }
-            });
+                navigate('/dashboard/employee');
+            } catch (err) {
+                console.error("Error posting data:", err);
+                Swal.fire('Error', 'Error posting data. Please try again.', 'error');
+            }
         }
     };
 
