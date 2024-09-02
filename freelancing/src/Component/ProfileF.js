@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-// import '../styles/profile.employee.css';
-
+import '../styles/profilef.css';
+import UserRatingsList from './UserRatingList.js';
 const ProfileF = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -19,6 +19,7 @@ const ProfileF = () => {
         
           const userResponse = await axios.get(`http://localhost:8000/FreelancerMarketplace/Freelancer/profile/${userId}`);
           setUser(userResponse.data);
+          console.log(userResponse.data)
         } else {
           setError('User not found in localStorage');
         }
@@ -43,14 +44,15 @@ const ProfileF = () => {
       </button>
       <div className="profile-card">
         <div className="profile-header">
-          <h1>{user.name}</h1>
+          <h1>{user.username}</h1>
           <p className="profile-status">Status: Freelancer</p>
         </div>
         <div className="profile-details">
           <p><strong>Email:</strong> {user.email}</p>
           <p><strong>Username:</strong> {user.username}</p>
-        </div>
+        </div> <UserRatingsList userId={user.id}/>
       </div>
+     
     </div>
   );
 };

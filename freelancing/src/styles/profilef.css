@@ -1,15 +1,9 @@
 /* profile.css */
 
-.profile-container {
-    font-family: 'Arial', sans-serif;
-    padding: 20px;
-    background-color: #f4f4f4;
-    min-height: 100vh;
-  }
-  
+
   .profile-header {
     text-align: center;
-    background-color: #2a6d5e; /* Dark green background */
+    /* background-color: #2a6d5e; Dark green background */
     color: white;
     padding: 20px;
     border-radius: 10px;
@@ -24,16 +18,16 @@
   }
   
   .profile-card {
-    background-color: white;
+    /* background-color: white; */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    width: 600px;
     text-align: center;
   }
   
   .profile-picture {
-    width: 100px;
+    /* width: 100px; */
     height: 100px;
     border-radius: 50%;
     object-fit: cover;

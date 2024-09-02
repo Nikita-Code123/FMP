@@ -22,7 +22,7 @@ import UpdatePStatus from './Component/UpdatePStatus.js';
 import EmployeeRatingForm from './Component/EmployeeRatingForm.js';
 import EmployeeRatingsList from './Component/EmployeeRatingList.js';
 import ForgotPassword from './Component/ForgetPassword.js';
-
+import UserRatingForm from './Component/UserRatingForm.js';
 function App() {
   const navigate = useNavigate();
 
@@ -83,6 +83,8 @@ function App() {
         <Route path="/update-status/:proposalId" element={<UpdatePStatus />} />
         <Route path="/rate/:employeeId" element={<EmployeeRatingForm  />} />
         <Route path ="/forgot-password" element ={<ForgotPassword/>}/>
+        <Route path="/rateuser/:userId" element={<UserRatingForm  />} />
+
 
       </Routes>
     </div>

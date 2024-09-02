@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/dashboard.css';
 import FreelancerViewProject from './ViewProject';
 
 const DashboardF = () => {
+  const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -25,6 +26,8 @@ const DashboardF = () => {
                   type="search"
                   placeholder="Search Jobs..."
                   aria-label="Search"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
                 />
                 <button className="searchBtn" type="button">
                   Search
@@ -46,8 +49,8 @@ const DashboardF = () => {
           </nav>
         </header>
       </div>
-      <br/>
-      <FreelancerViewProject />
+      <br />
+      <FreelancerViewProject searchQuery={searchQuery} />
     </>
   );
 };

@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 import crypto from 'crypto';
-import User from '../model/user.model.js';
+import Employee from '../model/employee.model.js';
 
 const otpMap = new Map();
 
@@ -14,10 +14,10 @@ const transporter = nodemailer.createTransport({
 });
 
 // Function to send OTP to email
-export const sendOtp = async (req, res) => {
+export const sendOtpE = async (req, res) => {
     try {
         const { email } = req.body;
-        const user = await User.findOne({ where: { email } });
+        const user = await Employee.findOne({ where: { email } });
 
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
@@ -48,7 +48,7 @@ export const sendOtp = async (req, res) => {
 };
 
 // Function to verify OTP
-export const verifyOtp = (req, res) => {
+export const verifyOtpE = (req, res) => {
     const { email, otp } = req.body;
 
     if (otpMap.get(email) == otp) {
@@ -60,10 +60,10 @@ export const verifyOtp = (req, res) => {
 };
 
 // Function to reset password
-export const resetPassword = async (req, res) => {
+export const resetPasswordE = async (req, res) => {
     try {
         const { email, newPassword } = req.body;
-        const user = await User.findOne({ where: { email } });
+        const user = await Employee.findOne({ where: { email } });
 
         if (!user) {
             return res.status(404).json({ error: 'User not found' });

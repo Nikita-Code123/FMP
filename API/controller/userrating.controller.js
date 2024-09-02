@@ -1,5 +1,6 @@
 import UserRating from '../model/userrating.model.js';
 import User from '../model/user.model.js';
+import Employee from '../model/employee.model.js';
 
 // Create a new UserRating
 const createUserRating = async (req, res) => {
@@ -20,13 +21,13 @@ const getRatingsByUser = async (req, res) => {
         const ratings = await UserRating.findAll({
             where: { userId },
             include: [
-                { model: User, as: 'reviewer', attributes: ['id', 'username'] }
+                { model: Employee }
             ]
         });
         res.status(200).json(ratings);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Failed to retrieve ratings' });
+        res.status(500).json({ message: 'Failed to retrieve ratings',error });
     }
 };
 

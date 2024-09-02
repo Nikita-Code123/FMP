@@ -1,68 +1,65 @@
-/* Body styling */
+
 body {
-    background-color: #f4f6f9; /* Light background color for the whole page */
-    font-family: 'Arial', sans-serif; /* A clean and modern font */
-    font-size: 16px; /* Set a consistent font size */
-    color: #333; /* Darker text color for better readability */
+    background-color: #f4f6f9; 
+    font-family: 'Arial', sans-serif; 
+    font-size: 16px; 
+    color: #333;
     margin: 0;
     padding: 0;
 }
 
-/* Container styling */
+
 .post-container {
     min-width: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100vh; /* Full height of the viewport */
+    min-height: 100vh; 
     padding: 20px;
 
 }
 
-/* Title styling */
 .post-title {
-    color: #1d3557; /* Dark blue color for consistency with the theme */
+    color: #1d3557; 
     margin-bottom: 30px;
 }
 
-/* Form styling */
+
 .post-form {
     box-shadow: 3px 5px 5px 5px #355075 ;
     border: 1px solid  #1d3557;
-    /* background-color: #ffffff; White background for form */
+ 
     padding: 20px;
-    border-radius: 8px; /* Rounded corners for a modern look */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     width: 100%;
-    max-width: 600px; /* Set a max-width for better readability */
+    max-width: 600px; 
 }
 
-/* Form group styling */
+
 .post-form-group {
     margin-bottom: 20px;
-    /* min-width: 100vh; */
+ 
 }
 
-/* Input and textarea styling */
 .form-control {
     border-radius: 5px;
-    border: 1px solid #ccc; /* Light grey border */
+    border: 1px solid #ccc; 
     padding: 10px;
     font-size: 16px;
-    color: #333; /* Text color inside form controls */
-    /* min-width: 100vh; */
+    color: #333; 
+
 }
 
-/* Error styling for invalid inputs */
 .is-invalid {
-    border-color: #dc3545; /* Red border color for invalid inputs */
+    border-color: #dc3545; 
 }
 
 .invalid-feedback {
     display: block;
-    color: #dc3545; /* Red color for error messages */
-    /* font-size */
+    color: #dc3545; 
+    
 }
 .post-button,.post-cancel-button{
     background-color: #82a9d6;

@@ -62,19 +62,19 @@
 }
 
 .left-panel {
-  width: 70%;
+  width: 60%;
   padding: 20px;
   box-sizing: border-box;
   overflow-y: auto;
 }
 .right-panel {
-  width: 30%;
+  width: 40%;
   padding: 20px;
   box-sizing: border-box;
   overflow-y: auto;
 }
 .left-panel {
-  background-color: #f4f4f4;
+  /* background-color: #f4f4f4; */
 }
 
 .right-panel {

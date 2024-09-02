@@ -93,3 +93,6 @@ body {
   color: #007bff;
   font-weight: bold;
 }
+.forgot-password-link{
+  padding: 20px;
+}

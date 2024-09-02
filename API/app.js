@@ -8,6 +8,8 @@ import ratinguserRouter from "./routes/userrating.routes.js";
 import ratingemployeeRouter from "./routes/employeerating.route.js"
 import forgetrouter from "./routes/forgetpassword.routes.js"
 import cors from 'cors'
+import dotenv from 'dotenv';
+dotenv.config();
 const app = express();
 app.use(cors())
 app.use(express.json())

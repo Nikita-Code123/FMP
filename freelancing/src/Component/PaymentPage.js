@@ -69,7 +69,7 @@ const PaymentPage = () => {
       );
       Swal.fire('Success', 'Payment processed successfully.', 'success').then(() => {
         // Navigate to the desired page, e.g., dashboard or proposals page
-        navigate('/dashboard/employee'); // Replace with the appropriate route
+        navigate(`/rateuser/${proposal.user.id}`); // Replace with the appropriate route
       });
       setIsPaid(true); // Update the local state to reflect payment
     } catch (err) {

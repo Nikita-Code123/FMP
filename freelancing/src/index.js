@@ -4,16 +4,18 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
 import { BrowserRouter } from 'react-router-dom'; // Import BrowserRouter
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Provider store={store}> {/* Wrap with Provider */}
+      <BrowserRouter> {/* Wrap with BrowserRouter */}
+        <App />
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );
 

@@ -51,9 +51,9 @@ const defineAssociations = () => {
     User.hasMany(EmployeeRating, { foreignKey: 'reviewerId' });
     EmployeeRating.belongsTo(User, { foreignKey: 'reviewerId' });
 
-    User.hasMany(UserRating, { foreignKey: 'reviewerId' });
-    UserRating.belongsTo(User, { foreignKey: 'reviewerId' });
-  
+    
+    Employee.hasMany(UserRating, { foreignKey: 'reviwerId' });
+    UserRating.belongsTo(Employee, { foreignKey: 'reviewerId' });
 };
 
 // Sync models and associations
