@@ -12,33 +12,34 @@ const defineAssociations = () => {
     Employee.belongsToMany(Project, { through: 'EmployeeProjects' });
     Project.belongsToMany(Employee, { through: 'EmployeeProjects' });
 
-    User.hasMany(Proposal, { foreignKey: 'freelancerId' }); //, as: 'proposals'
-    Proposal.belongsTo(User, { foreignKey: 'freelancerId' }); //, as: 'freelancer'
+    User.hasMany(Proposal, { foreignKey: 'freelancerId' }); 
+    Proposal.belongsTo(User, { foreignKey: 'freelancerId' }); 
 
-    Project.hasMany(Proposal, { foreignKey: 'projectId' }); //, as: 'proposals' 
-    Proposal.belongsTo(Project, { foreignKey: 'projectId' }); //, as: 'project'
+    Project.hasMany(Proposal, { foreignKey: 'projectId' });
+    Proposal.belongsTo(Project, { foreignKey: 'projectId' });
 
-    Employee.hasMany(Proposal, { foreignKey: 'employeeId' }); //, as: 'proposals'
-    Proposal.belongsTo(Employee, { foreignKey: 'employeeId' }); //, as: 'employee' 
+    Employee.hasMany(Proposal, { foreignKey: 'employeeId' });
+    Proposal.belongsTo(Employee, { foreignKey: 'employeeId' });
 
     // Payment Associations
-    Payment.belongsTo(User, { foreignKey: 'userId' }); //, as: 'user'
-    User.hasMany(Payment, { foreignKey: 'userId' }); //, as: 'payments'
+    Payment.belongsTo(User, { foreignKey: 'userId' });
+    User.hasMany(Payment, { foreignKey: 'userId' }); 
 
     // Payment belongs to a Project
-    Payment.belongsTo(Project, { foreignKey: 'projectId' }); //, as: 'project'
-    Project.hasMany(Payment, { foreignKey: 'projectId' }); //, as: 'payments'
+    Payment.belongsTo(Project, { foreignKey: 'projectId' });
+    Project.hasMany(Payment, { foreignKey: 'projectId' }); 
 
     // Payment belongs to a Proposal
-    Payment.belongsTo(Proposal, { foreignKey: 'proposalId' }); //, as: 'proposal'
-    Proposal.hasOne(Payment, { foreignKey: 'proposalId' });//, as: 'payment' 
+    Payment.belongsTo(Proposal, { foreignKey: 'proposalId' }); 
+    Proposal.hasOne(Payment, { foreignKey: 'proposalId' });
 
     // Payment belongs to an Employee
-    Payment.belongsTo(Employee, { foreignKey: 'employeeId' }); //, as: 'employee'
-    Employee.hasMany(Payment, { foreignKey: 'employeeId' }); //, as: 'payments'
+    Payment.belongsTo(Employee, { foreignKey: 'employeeId' }); 
+    Employee.hasMany(Payment, { foreignKey: 'employeeId' }); 
 
     Project.belongsTo(Employee, { foreignKey: 'employeeId' });
     Employee.hasMany(Project, { foreignKey: 'employeeId' });
+    
     Project.belongsToMany(Employee, { through: 'EmployeeProjects' });
     Employee.belongsToMany(Project, { through: 'EmployeeProjects' });
 
